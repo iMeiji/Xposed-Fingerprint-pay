@@ -22,7 +22,6 @@ import com.yyxx.wechatfp.Constant;
 import com.yyxx.wechatfp.Lang;
 import com.yyxx.wechatfp.R;
 import com.yyxx.wechatfp.adapter.PreferenceAdapter;
-import com.yyxx.wechatfp.network.updateCheck.UpdateFactory;
 import com.yyxx.wechatfp.util.Config;
 import com.yyxx.wechatfp.util.DpUtil;
 import com.yyxx.wechatfp.util.UrlUtil;
@@ -157,7 +156,7 @@ public class SettingsView extends DialogFrameLayout implements AdapterView.OnIte
                 config.setPassword(inputText);
             }).showInDialog();
         } else if (Lang.getString(R.id.settings_title_checkupdate).equals(data.title)) {
-            UpdateFactory.doUpdateCheck(context, false, true);
+//            UpdateFactory.doUpdateCheck(context, false, true);
         } else if (Lang.getString(R.id.settings_title_donate).equals(data.title)) {
             new DonateView(context).showInDialog();
         } else if (Lang.getString(R.id.settings_title_webside).equals(data.title)) {

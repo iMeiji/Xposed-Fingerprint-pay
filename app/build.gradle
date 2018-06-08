@@ -7,7 +7,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
     defaultConfig {
-        applicationId "com.surcumference.fingerprintpay"
+        applicationId "com.surcumference.fingerprintpay.clean"
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 19
@@ -169,7 +169,7 @@ dependencies {
     implementation 'com.wei.android.lib:fingerprintidentify:1.2.1'
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.okhttp3:okhttp:3.9.0'
-    implementation 'com.umeng.analytics:analytics:6.1.2'
+//    implementation 'com.umeng.analytics:analytics:6.1.2'
     implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.5'
     implementation 'com.github.AndroidDeveloperLB:MaterialPreferenceLibrary:10'
     provided 'de.robv.android.xposed:api:53'

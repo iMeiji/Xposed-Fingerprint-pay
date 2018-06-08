@@ -17,8 +17,6 @@ import com.yyxx.wechatfp.BuildConfig;
 import com.yyxx.wechatfp.Lang;
 import com.yyxx.wechatfp.R;
 import com.yyxx.wechatfp.adapter.PreferenceAdapter;
-import com.yyxx.wechatfp.network.updateCheck.UpdateFactory;
-import com.yyxx.wechatfp.util.Task;
 import com.yyxx.wechatfp.util.Umeng;
 import com.yyxx.wechatfp.util.UrlUtil;
 import com.yyxx.wechatfp.util.bugfixer.TagManagerBugFixer;
@@ -61,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         mListAdapter = new PreferenceAdapter(list);
         listView.setAdapter(mListAdapter);
         listView.setOnItemClickListener(this);
-        Task.onMain(1000L, () -> UpdateFactory.doUpdateCheck(HomeActivity.this));
+//        Task.onMain(1000L, () -> UpdateFactory.doUpdateCheck(HomeActivity.this));
         TagManagerBugFixer.fix();
     }
 
@@ -86,7 +84,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         } else if (Lang.getString(R.id.settings_title_donate).equals(data.title)) {
             new DonateView(this).showInDialog();
         } else if (Lang.getString(R.id.settings_title_checkupdate).equals(data.title)) {
-            UpdateFactory.doUpdateCheck(this, false, true);
+//            UpdateFactory.doUpdateCheck(this, false, true);
         } else if (Lang.getString(R.id.settings_title_license).equals(data.title)) {
             WebActivity.openUrl(this, HELP_URL_LICENSE);
         } else if (Lang.getString(R.id.settings_title_webside).equals(data.title)) {

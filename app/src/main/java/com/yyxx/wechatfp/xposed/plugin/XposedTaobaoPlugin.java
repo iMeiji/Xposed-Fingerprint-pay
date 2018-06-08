@@ -27,7 +27,6 @@ import com.wei.android.lib.fingerprintidentify.base.BaseFingerprint;
 import com.yyxx.wechatfp.BuildConfig;
 import com.yyxx.wechatfp.Lang;
 import com.yyxx.wechatfp.R;
-import com.yyxx.wechatfp.network.updateCheck.UpdateFactory;
 import com.yyxx.wechatfp.util.Config;
 import com.yyxx.wechatfp.util.DpUtil;
 import com.yyxx.wechatfp.util.ImageUtil;
@@ -80,7 +79,7 @@ public class XposedTaobaoPlugin {
 
             XposedHelpers.findAndHookMethod(Activity.class, "onResume", new XC_MethodHook() {
                 @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                protected void afterHookedMethod(MethodHookParam param) {
                     final Activity activity = (Activity) param.thisObject;
                     final String activityClzName = activity.getClass().getName();
                     if (BuildConfig.DEBUG) {
@@ -91,7 +90,7 @@ public class XposedTaobaoPlugin {
                     } else if (activityClzName.contains(".welcome.Welcome")) {
                         if (isFirstStartup) {
                             isFirstStartup = false;
-                            Task.onMain(6000, () -> UpdateFactory.doUpdateCheck(activity));
+//                            Task.onMain(6000, () -> UpdateFactory.doUpdateCheck(activity));
                         }
                     }
                 }
@@ -99,7 +98,7 @@ public class XposedTaobaoPlugin {
             XposedHelpers.findAndHookMethod(Activity.class, "onCreate", Bundle.class, new XC_MethodHook() {
 
                 @TargetApi(21)
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                protected void afterHookedMethod(MethodHookParam param) {
                     final Activity activity = (Activity) param.thisObject;
                     final String activityClzName = activity.getClass().getName();
                     if (BuildConfig.DEBUG) {
@@ -503,7 +502,7 @@ public class XposedTaobaoPlugin {
     }
 
     private EditText findPasswordEditText(Activity activity) {
-        View pwdEditText = ViewUtil.findViewByName(activity, "com.taobao.taobao", "input_et_password");;
+        View pwdEditText = ViewUtil.findViewByName(activity, "com.taobao.taobao", "input_et_password");
         if (pwdEditText instanceof EditText) {
             if (!pwdEditText.isShown()) {
                 return null;

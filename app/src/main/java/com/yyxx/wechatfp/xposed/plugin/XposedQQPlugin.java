@@ -29,7 +29,6 @@ import com.wei.android.lib.fingerprintidentify.base.BaseFingerprint;
 import com.yyxx.wechatfp.BuildConfig;
 import com.yyxx.wechatfp.Lang;
 import com.yyxx.wechatfp.R;
-import com.yyxx.wechatfp.network.updateCheck.UpdateFactory;
 import com.yyxx.wechatfp.util.Config;
 import com.yyxx.wechatfp.util.DpUtil;
 import com.yyxx.wechatfp.util.ImageUtil;
@@ -110,7 +109,7 @@ public class XposedQQPlugin {
             if (!Tools.isCurrentUserOwner(context)) {
                 XposedHelpers.findAndHookMethod(UserHandle.class, "getUserId", int.class, new XC_MethodHook() {
                     @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    protected void afterHookedMethod(MethodHookParam param) {
                         if (mMockCurrentUser) {
                             param.setResult(0);
                         }
@@ -120,7 +119,7 @@ public class XposedQQPlugin {
             XposedHelpers.findAndHookMethod(Activity.class, "onCreate", Bundle.class, new XC_MethodHook() {
 
                 @TargetApi(21)
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                protected void afterHookedMethod(MethodHookParam param) {
                     final Activity activity = (Activity) param.thisObject;
                     final String activityClzName = activity.getClass().getName();
                     if (BuildConfig.DEBUG) {
@@ -131,7 +130,7 @@ public class XposedQQPlugin {
                     } else if (activityClzName.contains(".SplashActivity")) {
                         if (isFirstStartup) {
                             isFirstStartup = false;
-                            Task.onMain(6000, () -> UpdateFactory.doUpdateCheck(activity));
+//                            Task.onMain(6000, () -> UpdateFactory.doUpdateCheck(activity));
                         }
                     }
                 }
@@ -140,7 +139,7 @@ public class XposedQQPlugin {
             XposedHelpers.findAndHookMethod(Activity.class, "onResume", new XC_MethodHook() {
 
                 @TargetApi(21)
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                protected void afterHookedMethod(MethodHookParam param) {
                     final Activity activity = (Activity) param.thisObject;
                     final String activityClzName = activity.getClass().getName();
                     if (BuildConfig.DEBUG) {
@@ -166,7 +165,7 @@ public class XposedQQPlugin {
             XposedHelpers.findAndHookMethod(Activity.class, "onPause", new XC_MethodHook() {
 
                 @TargetApi(21)
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                protected void afterHookedMethod(MethodHookParam param) {
                     final Activity activity = (Activity) param.thisObject;
                     final String activityClzName = activity.getClass().getName();
                     if (BuildConfig.DEBUG) {
